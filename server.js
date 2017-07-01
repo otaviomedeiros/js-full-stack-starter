@@ -15,7 +15,7 @@ app.post('/api/signup', (req, res) => {
 
   user.save((err, user) => {
     if (err) {
-      res.send(err);
+      res.status(422).send(err.errors);
     }
 
     res.json(user);
