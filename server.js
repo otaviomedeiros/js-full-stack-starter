@@ -1,27 +1,11 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/jsfullstackstarter');
-
-const { User } = require('./models');
+const AuthenticationController = require('./controllers/auth_controller');
+require('./config');
 
 app.use(bodyParser.json());
-
-app.post('/api/signup', (req, res) => {
-  const { email, password } = req.body;
-  const user = new User({ email, password });
-
-  user.save((err, user) => {
-    if (err) {
-      res.status(422).send(err.errors);
-    }
-
-    res.json({ token: jwt.sign({ user_id: user._id }, process.env.SECRET) });
-  });
-});
+app.post('/api/signup', AuthenticationController.signup);
 
 const port = process.env.PORT;
 
