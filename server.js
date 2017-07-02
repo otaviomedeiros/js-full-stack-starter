@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/jsfullstackstarter');
@@ -18,10 +19,12 @@ app.post('/api/signup', (req, res) => {
       res.status(422).send(err.errors);
     }
 
-    res.json(user);
+    res.json({ token: jwt.sign({ user_id: user._id }, process.env.SECRET) });
   });
 });
 
-app.listen(3000, () => {
-  console.log('listening on port 3000');
+const port = process.env.PORT;
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
 });
