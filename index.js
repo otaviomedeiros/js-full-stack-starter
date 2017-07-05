@@ -1,16 +1,19 @@
-require('./configs/db');
+require('./configs');
 
 const express = require('express');
 const app = express();
-const { passport, authenticate } = require('./configs/passport');
 const bodyParser = require('body-parser');
-const AuthenticationController = require('./controllers/auth_controller');
-const IndexController = require('./controllers/index_controller');
+const {
+  AuthenticationController,
+  passport,
+  authenticate
+} = require('./authentication');
+const { UserController } = require('./user');
 
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
-app.get('/', authenticate(), IndexController.index);
+app.get('/api/user', authenticate(), UserController.index);
 app.post('/api/signup', AuthenticationController.signup);
 app.post('/api/signin', AuthenticationController.signin);
 

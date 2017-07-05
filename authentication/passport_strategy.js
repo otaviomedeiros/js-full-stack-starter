@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../user');
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const jwtOptions = {
   secretOrKey: process.env.SECRET,
