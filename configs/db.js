@@ -1,2 +1,2 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/jsfullstackstarter');
+mongoose.connect(`${process.env.DATABASE_URI}/${process.env.DATABASE_NAME}`);
