@@ -5,17 +5,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const {
   AuthenticationController,
-  passport,
-  authenticate
+  passport
 } = require('./authentication');
-const { UserController } = require('./user');
+
+const routes = require('./routes');
+
 
 app.use(passport.initialize());
 app.use(bodyParser.json());
-
-app.get('/api/user', authenticate(), UserController.index);
-app.post('/api/signup', AuthenticationController.signup);
-app.post('/api/signin', AuthenticationController.signin);
+routes(app);
 
 const port = process.env.PORT;
 
