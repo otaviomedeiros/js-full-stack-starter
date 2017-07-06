@@ -1,15 +1,9 @@
-require('./configs');
 
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const {
-  AuthenticationController,
-  passport
-} = require('./authentication');
-
+const { passport } = require('./configs');
 const routes = require('./routes');
-
 
 app.use(passport.initialize());
 app.use(bodyParser.json());

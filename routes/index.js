@@ -1,9 +1,10 @@
 const express = require('express');
 const authRouter = express.Router();
 const apiRouter = express.Router();
+const { authenticate } = require('../configs');
 
-const { UserController } = require('../user');
-const { AuthenticationController, authenticate } = require('../authentication');
+const UserController = require('../controllers/user_controller');
+const AuthenticationController = require('../controllers/auth_controller');
 
 authRouter.post('/signup', AuthenticationController.signup);
 authRouter.post('/signin', AuthenticationController.signin);
