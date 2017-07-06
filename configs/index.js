@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('./db');
 const { passport, authenticate } = require('./passport');
 
